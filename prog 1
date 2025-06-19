@@ -1,0 +1,59 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Sample data creation (You would replace this with your actual data loading)
+data = {
+    'm1': [88, 92, 76, 89, None, 84, 93],
+    'm2': [82, None, 75, 80, 85, 90, 86],
+    'm3': [87, 90, 78, 85, 88, None, 99]
+}
+
+# Create a DataFrame
+marks = pd.DataFrame(data)
+
+# i) Read the data from the table
+print("Data Frame:")
+print(marks)
+
+# ii) Retrieve only first and last 5 rows
+print("\nFirst and Last 5 Rows:")
+print(pd.concat([marks.head(), marks.tail()]))
+
+# iii) Purpose of describe() function in pandas
+# The describe() function in pandas generates descriptive statistics that summarize the central tendency,
+# dispersion, and shape of a dataset’s distribution. This includes measures like count, mean, standard deviation,
+# min, max, and quartile values.
+
+# iv) Select only 3rd to 6th row
+print("\n3rd to 6th Row:")
+print(marks.iloc[2:6])
+
+# v) Select only the column m3 greater than 84 marks
+print("\nColumn m3 Greater Than 84 Marks:")
+print(marks[marks['m3'] > 84])
+
+# vi) Filter the rows with missing values
+print("\nRows with Missing Values:")
+print(marks[marks.isnull().any(axis=1)])
+
+# vii) Remove the missing values rows
+print("\nData Frame after Removing Missing Values:")
+marks_cleaned = marks.dropna()
+print(marks_cleaned)
+
+# viii) Sort the m1 column in descending order
+print("\nSorted m1 Column in Descending Order:")
+print(marks.sort_values(by='m1', ascending=False))
+
+# ix) Plot the table
+marks.plot(kind='bar')
+plt.title('Marks Distribution')
+plt.xlabel('Index')
+plt.ylabel('Marks')
+plt.xticks(rotation=0)
+plt.legend(title='Subjects')
+plt.show()
+
+# x) Output for the code: marks.ix[ 3:6, [‘m2’,’m3’] ]
+print("\nOutput for marks.ix[ 3:6, ['m2', 'm3'] ]:")
+print(marks.loc[3:6, ['m2', 'm3']])
